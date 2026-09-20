@@ -14,41 +14,42 @@ An end-to-end medical image diagnostic platform that integrates a PyTorch Convol
 
 ## System Architecture
 
-  [ Input Image: 64x64 Grayscale ]
-                 |
-                 v
-  [ PyTorch CNN Feature Extractor (Backbone) ]
-  (3x Conv2D + BatchNorm + ReLU + MaxPool2D)
-                 |
-                 v
-    [ Adaptive Average Pooling ]
-                 |
-                 v
-      [ 4D Bottleneck Vector ]
-                 |
-      [ Angle Scaling: pi * tanh ]
-                 |
- +---------------+---------------+
- |                               |
- v                               v
-[ Path A: Classical Head ]   [ Path B: Quantum Layer ]
-(Linear 4 -> 2 Logits)       (PennyLane 4-Qubit VQC)
- |                               |
- |                    Angle Embedding: Ry(phi_i)
- |                               |
- |                    2x Variational Layers: Rot
- |                               |
- |                    Ring Entanglement: CNOT
- |                               |
- |                    Expectation: <Z_i> in [-1, 1]
- |                               |
- |                    Readout Head: Linear 4 -> 2
- |                               |
- +---------------+---------------+
-                 |
-                 v
-    [ Softmax Classification ]
-     (NORMAL vs PNEUMONIA)
+```text
+                                  [ Input Image: 64x64 Grayscale ]
+                                                 |
+                                                 v
+                             [ PyTorch CNN Feature Extractor (Backbone) ]
+                             (3x Conv2D + BatchNorm + ReLU + MaxPool2D)
+                                                 |
+                                                 v
+                                   [ Adaptive Average Pooling ]
+                                                 |
+                                                 v
+                                     [ 4D Bottleneck Vector ]
+                                                 |
+                                     [ Angle Scaling: pi * tanh ]
+                                                 |
+                                +----------------+----------------+
+                                |                                 |
+                                v                                 v
+                     [ Path A: Classical Head ]       [ Path B: Quantum Layer ]
+                       (Linear 4 -> 2 Logits)           (PennyLane 4-Qubit VQC)
+                                |                                 |
+                                |                      Angle Embedding: Ry(phi_i)
+                                |                                 |
+                                |                      2x Variational Layers: Rot
+                                |                                 |
+                                |                      Ring Entanglement: CNOT
+                                |                                 |
+                                |                      Expectation: <Z_i> in [-1, 1]
+                                |                                 |
+                                |                      Readout Head: Linear 4 -> 2
+                                |                                 |
+                                +----------------+----------------+
+                                                 |
+                                                 v
+                                    [ Softmax Classification ]
+                                     (NORMAL vs PNEUMONIA)
 
 ---
 
