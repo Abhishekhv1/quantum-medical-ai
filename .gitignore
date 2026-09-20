@@ -1,0 +1,27 @@
+﻿# Python & Virtual Environments
+.venv/
+venv/
+ENV/
+__pycache__/
+*.pyc
+
+# Data & Datasets (Keep code, exclude raw/processed heavy images)
+data/
+*.zip
+*.tar.gz
+
+# Model Checkpoints & Large Files (Include if small, otherwise ignore)
+*.pth
+*.pt
+*.onnx
+
+# Node / React Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# IDE & OS Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
