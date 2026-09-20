@@ -50,6 +50,7 @@ An end-to-end medical image diagnostic platform that integrates a PyTorch Convol
                                                  v
                                     [ Softmax Classification ]
                                      (NORMAL vs PNEUMONIA)
+```
 
 ---
 
